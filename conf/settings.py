@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     # Local
     "accounts.apps.AccountsConfig",
     "articles.apps.ArticlesConfig",
+    "api.apps.ApiConfig",
+    "frontend.app.FrontendConfig",
 ]
 
 MIDDLEWARE = [
@@ -142,3 +144,8 @@ SITE_ID = 1
 
 # https://docs.djangoproject.com/en/4.1/topics/email/#console-backend
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# MEDIA_ROOT and MEDIA_URL (These are comments!)
+# https://docs.djangoproject.com/en/4.1/ref/settings/#media-url
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
