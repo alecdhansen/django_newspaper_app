@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate, Routes, Route } from "react-router-dom";
+import Layout from "../Layout/Layout";
+import LoadPage from "../Login/LoadPage";
+import ProfileForm from "../Profile/ProfileForm";
+import Articles from "../Articles/Articles";
 import Spinner from "react-bootstrap/Spinner";
 
-function App(props) {
-  const [isAuth, setIsAuth] = useState(null);
+function App() {
+  const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState({ username: "", password: "" });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,28 +17,43 @@ function App(props) {
       const response = await fetch("/dj-rest-auth/user/");
       if (!response.ok) {
         setIsAuth(false);
-        navigate("/login/");
+        // navigate("/loadpage/");
       } else {
+        // debugger;
         setIsAuth(true);
-        navigate("/articles/");
+        // navigate("/articles/");
       }
     };
     checkAuth();
   }, [navigate]);
 
-  if (isAuth === null) {
-    return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    );
-  }
+  console.log({ isAuth });
 
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <Routes>
+        <Route
+          path="/"
+          element={<Layout isAuth={isAuth} setIsAuth={setIsAuth} user={user} />}
+        >
+          <Route index element={<Articles />} />
+          <Route
+            path="loadpage"
+            element={
+              <LoadPage setIsAuth={setIsAuth} user={user} setUser={setUser} />
+            }
+          />
+          <Route path="profile" element={<ProfileForm />} />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <main>
+              <p>there is nothing here! try again! lol!</p>
+            </main>
+          }
+        />
+      </Routes>
     </>
   );
 }

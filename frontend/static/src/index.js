@@ -4,32 +4,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./components/App/App";
-import LoginForm from "./components/Login/LoginForm";
-import RegistrationForm from "./components/Registration/RegistrationForm";
-import ProfileForm from "./components/Profile/ProfileForm";
-import Articles from "./components/Articles/Articles";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="login" element={<LoginForm />} />
-          <Route path="registration" element={<RegistrationForm />} />
-          <Route path="profile" element={<ProfileForm />} />
-          <Route path="articles" element={<Articles />} />
-        </Route>
-        <Route
-          path="*"
-          element={
-            <main>
-              <p>there is nothing here! try again! lol!</p>
-            </main>
-          }
-        />
-      </Routes>
+      <App />
     </BrowserRouter>
   </React.StrictMode>
   // document.getElementById("root")
