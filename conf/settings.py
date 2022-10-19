@@ -45,12 +45,23 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "dj_rest_auth.registration",
     # Local
     "accounts.apps.AccountsConfig",
     "articles.apps.ArticlesConfig",
     "api.apps.ApiConfig",
-    "frontend.app.FrontendConfig",
+    "frontend.apps.FrontendConfig",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -149,3 +160,9 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#media-url
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+# Static file directories
+# https://docs.djangoproject.com/en/4.1/ref/settings/#staticfiles-dirs
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "frontend/static/build/static"),)
+REACT_APP_DIR = os.path.join(BASE_DIR, "frontend/static")
