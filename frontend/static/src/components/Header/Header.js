@@ -34,33 +34,41 @@ function Header({ isAuth, setIsAuth, user }) {
   };
 
   return (
-    <Nav defaultActiveKey="/home" as="ul" className="navbar">
-      <Nav.Item as="li" className="navlink">
-        <Nav.Link href="/articles/" className="link">
-          Articles
-        </Nav.Link>
-      </Nav.Item>
-      {isAuth ? (
-        <Nav.Item as="li" className="navlink">
-          <Nav.Link href="/profile/" className="link">
-            Profile
-          </Nav.Link>
-        </Nav.Item>
-      ) : (
-        ""
-      )}
-      {!isAuth ? (
-        <Nav.Item as="li" className="navlink">
-          <Nav.Link href="/loadpage/" className="link">
-            Login
-          </Nav.Link>
-        </Nav.Item>
-      ) : (
-        <Button as="li" className="navlink" onClick={() => logout()}>
-          <div className="link">Logout</div>
-        </Button>
-      )}
-    </Nav>
+    <>
+      <header className="mainheader row">
+        <div className="col-5 left-h"></div>
+        <div className="col-2 center-h"></div>
+        <Nav defaultActiveKey="/home" as="ul" className="navbar col-5">
+          <Nav.Item as="li" className="navlink">
+            <Nav.Link href="/" className="link">
+              Articles
+            </Nav.Link>
+          </Nav.Item>
+          {isAuth ? (
+            <Nav.Item as="li" className="navlink">
+              <Nav.Link href="/profile/" className="link">
+                Profile
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            ""
+          )}
+          {!isAuth ? (
+            <Nav.Item as="li" className="navlink">
+              <Nav.Link href="/loadpage/" className="link">
+                Login
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            <Button as="li" className="navlink" onClick={() => logout()}>
+              <div className="link">Logout</div>
+            </Button>
+          )}
+        </Nav>
+      </header>
+      <h2 className="col-12 titlelogo">Ch</h2>
+      <h3 className="titlesublogo">ChattnNews</h3>
+    </>
   );
 }
 export default Header;

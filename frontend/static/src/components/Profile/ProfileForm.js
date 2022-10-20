@@ -36,11 +36,27 @@ function ProfileForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Control type="file" name="avatar" onChange={handleImage} />
-      {profile.avatar && <img src={preview} alt="" />}
-      <Button type="submit">Save</Button>
-    </Form>
+    <div className="col-2 offset-5">
+      <h4 style={{ textAlign: "center", marginBottom: "30px" }}>
+        Upload a Profile Image Below
+      </h4>
+      <Form onSubmit={handleSubmit}>
+        <Form.Control
+          style={{ marginBottom: "30px" }}
+          type="file"
+          name="avatar"
+          onChange={handleImage}
+        />
+        {profile.avatar && <img src={preview} alt="" />}
+        <Button
+          style={{ marginBottom: "180px" }}
+          type="submit"
+          className="submitbtn0"
+        >
+          Save
+        </Button>
+      </Form>
+    </div>
   );
 }
 export default ProfileForm;
