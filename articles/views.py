@@ -11,7 +11,7 @@ from .permissions import IsAuthorOrReadOnly
 
 class ArticleListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Article.objects.order_by("-created_at")
+    queryset = Article.objects.filter(is_published=True)
     serializer_class = ArticleSerializer
 
     def perform_create(self, serializer):
