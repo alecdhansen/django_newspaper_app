@@ -18,6 +18,16 @@ class ArticleListAPIView(generics.ListCreateAPIView):
         serializer.save(authors=self.request.user)
 
 
+class UserArticleListAPIView(generics.ListCreateAPIView):
+    serializer_class = ArticleSerializer
+
+    def get_queryset(self):
+        return Article.objects.filter(author=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(authors=self.request.user)
+
+
 class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthorOrReadOnly,)
     queryset = Article.objects.all()

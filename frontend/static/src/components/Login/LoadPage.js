@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import { useState } from "react";
 
-function LoadPage({ setIsAuth, user, setUser, setState }) {
+function LoadPage({ setIsAuth, setState }) {
   const [modalShow, setModalShow] = useState(false);
   const [registerModalShow, setRegisterModalShow] = useState(false);
   return (
@@ -17,8 +17,6 @@ function LoadPage({ setIsAuth, user, setUser, setState }) {
           show={modalShow}
           onHide={() => setModalShow(false)}
           setIsAuth={setIsAuth}
-          user={user}
-          setUser={setUser}
           setState={setState}
         />
 

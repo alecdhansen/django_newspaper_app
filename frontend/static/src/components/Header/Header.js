@@ -3,20 +3,20 @@ import Button from "react-bootstrap/Button";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-function Header({ isAuth, setIsAuth, user }) {
+function Header({ isAuth, setIsAuth, state }) {
   const navigate = useNavigate();
   const handleError = (err) => {
     console.warn(err);
   };
 
-  const logout = async (e) => {
+  const logout = async () => {
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(state),
     };
     const response = await fetch("/dj-rest-auth/logout/", options).catch(
       handleError
@@ -28,6 +28,7 @@ function Header({ isAuth, setIsAuth, user }) {
       Cookies.remove("Authorization", `Token${" "}${data.key}`);
       document.cookie =
         "sessionid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      sessionStorage.clear();
       await setIsAuth(false);
       navigate("/");
     }
@@ -50,7 +51,7 @@ function Header({ isAuth, setIsAuth, user }) {
           )}
           {isAuth ? (
             <Nav.Item as="li" className="navlink">
-              <Nav.Link href="/myarticles/" className="link">
+              <Nav.Link href="/user/articles/" className="link">
                 My Articles
               </Nav.Link>
             </Nav.Item>
@@ -59,7 +60,7 @@ function Header({ isAuth, setIsAuth, user }) {
           )}
           {isAuth ? (
             <Nav.Item as="li" className="navlink">
-              <Nav.Link href="/profile/" className="link">
+              <Nav.Link href="/user/profile/" className="link">
                 Profile
               </Nav.Link>
             </Nav.Item>

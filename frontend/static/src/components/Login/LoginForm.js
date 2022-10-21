@@ -6,19 +6,25 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
-  const { setIsAuth, user, setUser, setState } = props;
+  const [user, setUser] = useState({ username: "", password: "" });
+  const { setIsAuth, setState } = props;
   const navigate = useNavigate();
 
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setUser((prevState) => ({ ...prevState, [name]: value }));
+  const handleUsernameInput = (e) => {
+    const value = e.target.value;
+    setUser((prevState) => ({ ...prevState, username: value }));
+  };
+
+  const handlePasswordInput = (e) => {
+    const value = e.target.value;
+    setUser((prevState) => ({ ...prevState, password: value }));
   };
 
   const handleError = (err) => {
     console.warn(err);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, state) => {
     // debugger;
     e.preventDefault();
     const options = {
@@ -39,8 +45,10 @@ function LoginForm(props) {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
       await setIsAuth(true);
-      console.dir(data);
-      setState({ authorId: data.id });
+      // get id, then make a call to /users, set data to "state"
+      setState(data);
+      sessionStorage.setItem("state", JSON.stringify(data));
+      console.log(data);
       navigate("/");
     }
   };
@@ -65,7 +73,7 @@ function LoginForm(props) {
                 type="text"
                 placeholder="Enter username"
                 value={user.username}
-                onChange={handleInput}
+                onChange={handleUsernameInput}
                 name="username"
                 className="input0"
               />
@@ -77,7 +85,7 @@ function LoginForm(props) {
                 type="password"
                 placeholder="Password..."
                 value={user.password}
-                onChange={handleInput}
+                onChange={handlePasswordInput}
                 name="password"
                 className="input0"
               />

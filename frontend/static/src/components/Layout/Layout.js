@@ -4,16 +4,16 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ScrollToTop from "react-scroll-to-top";
 
-function Layout({ isAuth, setIsAuth, user }) {
+function Layout({ isAuth, setIsAuth, state }) {
   return (
     <>
-      <Header isAuth={isAuth} setIsAuth={setIsAuth} user={user} />
+      <Header isAuth={isAuth} setIsAuth={setIsAuth} state={state} />
       <Outlet />
       <ScrollToTop
         color="#fff"
         style={{ bottom: 80, right: 50, backgroundColor: "rgb(229, 70, 70)" }}
       />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

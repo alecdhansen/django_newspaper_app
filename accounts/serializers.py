@@ -12,8 +12,12 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class TokenSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source="user.username")
+    first_name = serializers.ReadOnlyField(source="user.first_name")
+    last_name = serializers.ReadOnlyField(source="user.last_name")
     is_superuser = serializers.ReadOnlyField(source="user.is_superuser")
     id = serializers.ReadOnlyField(source="user.id")
+    date_joined = serializers.ReadOnlyField(source="user.date_joined")
 
     class Meta:
         model = TokenModel
@@ -21,4 +25,8 @@ class TokenSerializer(serializers.ModelSerializer):
             "key",
             "is_superuser",
             "id",
+            "username",
+            "first_name",
+            "last_name",
+            "date_joined",
         )
