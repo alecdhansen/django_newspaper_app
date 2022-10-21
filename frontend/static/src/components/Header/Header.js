@@ -36,14 +36,27 @@ function Header({ isAuth, setIsAuth, user }) {
   return (
     <>
       <header className="mainheader row">
-        <div className="col-5 left-h"></div>
-        <div className="col-2 center-h"></div>
-        <Nav defaultActiveKey="/home" as="ul" className="navbar col-5">
-          <Nav.Item as="li" className="navlink">
-            <Nav.Link href="/" className="link">
-              Articles
-            </Nav.Link>
-          </Nav.Item>
+        <div className="col-4 col-md-5 left-h"></div>
+        <div className="col-4 col-md-2 center-h"></div>
+        <Nav defaultActiveKey="/home" as="ul" className="navbar col-4 col-md-5">
+          {isAuth ? (
+            <Nav.Item as="li" className="navlink">
+              <Nav.Link href="/" className="link">
+                Home
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            ""
+          )}
+          {isAuth ? (
+            <Nav.Item as="li" className="navlink">
+              <Nav.Link href="/myarticles/" className="link">
+                My Articles
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            ""
+          )}
           {isAuth ? (
             <Nav.Item as="li" className="navlink">
               <Nav.Link href="/profile/" className="link">

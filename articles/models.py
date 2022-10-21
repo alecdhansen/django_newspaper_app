@@ -6,6 +6,16 @@ class Article(models.Model):
     WORLD = "World"
     SPORTS = "Sports"
     LOCAL = "Local"
+    DRAFT = "Draft"
+    SUBMITTED = "Submitted"
+    PUBLISHED = "Published"
+    REJECTED = "Rejected"
+    STATES = [
+        (DRAFT, "Draft"),
+        (SUBMITTED, "Submitted"),
+        (PUBLISHED, "Published"),
+        (REJECTED, "Rejected"),
+    ]
     CHOICES = [
         (WORLD, "World"),
         (SPORTS, "Sports"),
@@ -18,6 +28,7 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
     image = models.ImageField(upload_to="articles/", null=True)
+    article_process = models.CharField(max_length=10, choices=STATES, default=DRAFT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)

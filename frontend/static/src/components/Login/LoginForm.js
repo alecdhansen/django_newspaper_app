@@ -6,9 +6,8 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
-  const { show, onHide, setIsAuth, user, setUser } = props;
+  const { setIsAuth, user, setUser, setState } = props;
   const navigate = useNavigate();
-  // const [user, setUser] = useState({ username: "", password: "" });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -35,11 +34,13 @@ function LoginForm(props) {
       handleError
     );
     if (!response.ok) {
-      throw new Error("Oops! Something went wrong");
+      throw new Error("Uh oh. Something went wrong. Check your network tab!");
     } else {
       const data = await response.json();
-      Cookies.set("Authorization", `Token${" "}${data.key}`);
+      Cookies.set("Authorization", `Token ${data.key}`);
       await setIsAuth(true);
+      console.dir(data);
+      setState({ authorId: data.id });
       navigate("/");
     }
   };
@@ -57,7 +58,7 @@ function LoginForm(props) {
           <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form className="form" onSubmit={handleSubmit}>
             <Form.Group className="mb-3 labelwrap0" controlId="username">
               <Form.Label className="label0">Username</Form.Label>
               <Form.Control
@@ -81,10 +82,11 @@ function LoginForm(props) {
                 className="input0"
               />
             </Form.Group>
-
-            <Button variant="primary" type="submit" className="submitbtn0">
-              Submit
-            </Button>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="primary" type="submit" className="submitbtn0">
+                Submit
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>

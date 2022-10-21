@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import { useState } from "react";
 
-function LoadPage({ setIsAuth, user, setUser }) {
+function LoadPage({ setIsAuth, user, setUser, setState }) {
   const [modalShow, setModalShow] = useState(false);
   const [registerModalShow, setRegisterModalShow] = useState(false);
   return (
@@ -19,6 +19,7 @@ function LoadPage({ setIsAuth, user, setUser }) {
           setIsAuth={setIsAuth}
           user={user}
           setUser={setUser}
+          setState={setState}
         />
 
         <h2>Sign Me Up!</h2>
@@ -33,6 +34,7 @@ function LoadPage({ setIsAuth, user, setUser }) {
           show={registerModalShow}
           onHide={() => setRegisterModalShow(false)}
           setIsAuth={setIsAuth}
+          setState={setState}
         />
       </div>
     </div>

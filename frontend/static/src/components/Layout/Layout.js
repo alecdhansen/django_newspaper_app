@@ -2,12 +2,17 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import ScrollToTop from "react-scroll-to-top";
 
 function Layout({ isAuth, setIsAuth, user }) {
   return (
     <>
       <Header isAuth={isAuth} setIsAuth={setIsAuth} user={user} />
       <Outlet />
+      <ScrollToTop
+        color="#fff"
+        style={{ bottom: 80, right: 50, backgroundColor: "rgb(229, 70, 70)" }}
+      />
       <Footer />
     </>
   );

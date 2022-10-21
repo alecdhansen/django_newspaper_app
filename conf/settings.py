@@ -166,3 +166,7 @@ MEDIA_URL = "/media/"
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "frontend/static/build/static"),)
 REACT_APP_DIR = os.path.join(BASE_DIR, "frontend/static")
+
+REST_AUTH_SERIALIZERS = {
+    "TOKEN_SERIALIZER": "accounts.serializers.TokenSerializer",
+}

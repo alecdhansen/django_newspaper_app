@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { AiOutlineSend } from "react-icons/ai";
-import { FaTrashAlt } from "react-icons/fa";
 
 function Articles() {
   const [text, setText] = useState("");
   const [articles, setArticles] = useState([]);
   const [activeArticle, setActiveArticle] = useState([]);
   const [filter, setFilter] = useState("");
+  const [activeArticleID, setActiveArticleID] = useState(0);
+
   const categoryList = [
     ...new Set(articles.map((article) => article.category)),
   ];
@@ -23,7 +20,6 @@ function Articles() {
       {category}
     </Button>
   ));
-  //   const [filterCriteria] = useState();
 
   const handleError = (err) => {
     console.warn(err);
@@ -33,9 +29,10 @@ function Articles() {
     const index = articles.findIndex((article) => article.id === id);
     const selectedArticle = articles[index];
     setActiveArticle(selectedArticle);
-  };
+    console.log("this", activeArticleID);
 
-  // button setsFilterCriteria
+    window.scrollTo({ top: 230, behavior: "smooth" });
+  };
 
   useEffect(() => {
     getArticles();
@@ -48,26 +45,14 @@ function Articles() {
     } else {
       const data = await response.json();
       setArticles(data);
+      setActiveArticle(data[0]);
     }
   };
 
-  //   const showArticle = async () => {
-  //     const response = await fetch("/api_v1/articles/").catch(handleError);
-  //     if (!response.ok) {
-  //       throw new Error("Network response not OK");
-  //     } else {
-  //       const data = await response.json();
-  //       setArticles(data);
-  //     }
-  //   };
-
-  // have a filter criteria variable that you use in the .filter call
-  // const filteredArticles = articles.filter(article => {{articles that match a certain criteria}})
-  // filteredArticles.map()
   const articleListHtml = articles
     .filter((article) => (filter ? article.category === filter : article))
     .map((article) => (
-      <li className="btnlist row" style={{ height: "150px" }}>
+      <li key={article.id} className="btnlist row" style={{ height: "150px" }}>
         <div className="col-7 left">
           <button
             className="articlelis row-6"
@@ -80,7 +65,7 @@ function Articles() {
           </button>
           <p className="row-6 author">By {article.author_name}</p>
         </div>
-        <div className="col-5 right">
+        <div className="col-5 right previewimg">
           <img
             style={{ width: "100%", borderRadius: "2px" }}
             src={article.image}
@@ -93,7 +78,7 @@ function Articles() {
     <>
       <main className="col-10 offset-1 main">
         <div className="articles row">
-          <div className="articleview col-6">
+          <div className="articleview col-12 col-md-6">
             <img
               style={{ width: "100%", borderRadius: "2px" }}
               src={activeArticle.image}
@@ -129,7 +114,7 @@ function Articles() {
             className="col-1"
             style={{ borderRight: "0.5px solid rgb(182, 182, 182)" }}
           ></div>
-          <div className="articleul col-3 offset-1">
+          <div className="articleul col-12 col-md-3 offset-md-1">
             <div className="filters">
               <div className="filters2">
                 <Button
@@ -150,9 +135,3 @@ function Articles() {
   );
 }
 export default Articles;
-
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     addArticles(text);
-//     setText("");
-//   }
