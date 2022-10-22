@@ -2,8 +2,9 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useReducer } from "react";
 
-function Header({ isAuth, setIsAuth, state }) {
+function Header({ isAuth, setIsAuth, state, newState }) {
   const navigate = useNavigate();
   const handleError = (err) => {
     console.warn(err);
@@ -37,9 +38,27 @@ function Header({ isAuth, setIsAuth, state }) {
   return (
     <>
       <header className="mainheader row">
-        <div className="col-4 col-md-5 left-h"></div>
+        <div
+          style={{ display: "flex", alignItems: "center" }}
+          className="col-4 col-md-5 left-h"
+        >
+          {isAuth ? (
+            <div>
+              Welcome,{" "}
+              <button className="welcomeusernamebtn">
+                <a href="/user/profile/" className="welcomeusername">
+                  {newState.username}
+                </a>
+                !
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+
         <div className="col-4 col-md-2 center-h"></div>
-        <Nav defaultActiveKey="/home" as="ul" className="navbar col-4 col-md-5">
+        <Nav defaultActiveKey="/home" className="navbar col-4 col-md-5">
           {isAuth ? (
             <Nav.Item as="li" className="navlink">
               <Nav.Link href="/" className="link">

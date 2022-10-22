@@ -6,7 +6,6 @@ function Articles() {
   const [articles, setArticles] = useState([]);
   const [activeArticle, setActiveArticle] = useState([]);
   const [filter, setFilter] = useState("");
-  const [activeArticleID, setActiveArticleID] = useState(0);
 
   const categoryList = [
     ...new Set(articles.map((article) => article.category)),
@@ -29,7 +28,6 @@ function Articles() {
     const index = articles.findIndex((article) => article.id === id);
     const selectedArticle = articles[index];
     setActiveArticle(selectedArticle);
-    console.log("this", activeArticleID);
 
     window.scrollTo({ top: 230, behavior: "smooth" });
   };

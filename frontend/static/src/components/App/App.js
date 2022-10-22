@@ -38,7 +38,12 @@ function App() {
         <Route
           path="/"
           element={
-            <Layout isAuth={isAuth} setIsAuth={setIsAuth} state={state} />
+            <Layout
+              isAuth={isAuth}
+              setIsAuth={setIsAuth}
+              state={state}
+              newState={newState}
+            />
           }
         >
           <Route index element={<Articles />} />

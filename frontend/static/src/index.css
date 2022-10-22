@@ -32,6 +32,17 @@ code {
 .link:hover {
   color: rgb(229, 70, 70);
 }
+.welcomeusernamebtn {
+  background-color: #fff;
+  border: none;
+}
+.welcomeusername {
+  background-color: #fff;
+  border: none;
+  font-weight: bold;
+  color: rgb(229, 70, 70);
+  text-decoration: none;
+}
 .footer {
   display: flex;
   justify-content: center;
@@ -46,32 +57,6 @@ code {
 .copywrite {
   margin-right: 5px;
 }
-/* .outlet {
-  height: 100vh;
-} */
-/* .loginformpage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 90vh;
-} */
-/* .loginform {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 40%;
-  background: linear-gradient(
-    90deg,
-    rgb(234, 234, 234) 0%,
-    rgb(222, 222, 222) 100%
-  );
-  border-radius: 30px;
-  box-shadow: 5px 5px 14px #848484, -28px -28px 46px #ffffff;
-  margin: 30px 0px;
-  padding: 20px 0px;
-} */
 .labelwrap0 {
   display: flex;
   align-items: baseline;
@@ -137,6 +122,11 @@ code {
 }
 .left-h {
   border-bottom: 0.5px solid rgb(182, 182, 182);
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  z-index: 20;
+  padding: 8px 0px 8px 75px;
 }
 .navbar {
   display: flex;
@@ -241,6 +231,29 @@ code {
 }
 .right {
   padding: 16px 0px 0px 0px;
+}
+.myarticles {
+  margin: 50px 0px;
+}
+.my-article-titles {
+  padding: 0px;
+  background-color: #fff;
+  border: none;
+
+  /* width: 100%; */
+}
+.my-article-title {
+  text-align: left;
+  font-size: 20px;
+  padding: 0px;
+  margin: 0px;
+}
+.progresslabel {
+  background-color: rgb(229, 70, 70);
+  color: #fff;
+  padding: 6px 6px;
+  border-radius: 10px;
+  font-size: 12px;
 }
 @media (max-width: 785px) {
   .filters2 {
