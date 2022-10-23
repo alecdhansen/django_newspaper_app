@@ -44,6 +44,7 @@ function RegistrationForm(props) {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
       await props.setIsAuth(true);
+      sessionStorage.setItem("state", JSON.stringify(data));
       navigate("/");
     }
   };

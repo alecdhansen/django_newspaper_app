@@ -18,6 +18,7 @@ class TokenSerializer(serializers.ModelSerializer):
     is_superuser = serializers.ReadOnlyField(source="user.is_superuser")
     id = serializers.ReadOnlyField(source="user.id")
     date_joined = serializers.ReadOnlyField(source="user.date_joined")
+    avatar = serializers.ImageField(source="user.profile.avatar")
 
     class Meta:
         model = TokenModel
@@ -29,4 +30,5 @@ class TokenSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "date_joined",
+            "avatar",
         )

@@ -15,7 +15,7 @@ class ArticleListAPIView(generics.ListCreateAPIView):
     serializer_class = ArticleSerializer
 
     def perform_create(self, serializer):
-        serializer.save(authors=self.request.user)
+        serializer.save(author=self.request.user)
 
 
 class UserArticleListAPIView(generics.ListCreateAPIView):
@@ -25,7 +25,7 @@ class UserArticleListAPIView(generics.ListCreateAPIView):
         return Article.objects.filter(author=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(authors=self.request.user)
+        serializer.save(author=self.request.user)
 
 
 class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):

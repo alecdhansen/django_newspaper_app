@@ -2,10 +2,12 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 
 function ProfileForm() {
   const [profile, setProfile] = useState({ avatar: null });
   const [preview, setPreview] = useState("");
+  const navigate = useNavigate();
 
   const handleImage = (e) => {
     console.dir(e.target);
@@ -30,8 +32,9 @@ function ProfileForm() {
       },
       body: formData,
     };
-    const response = await fetch("/api_v1/profiles/", options);
+    const response = await fetch("/api_v1/user/profile/", options);
     const data = await response.json();
+    navigate("/");
     console.log(data);
   };
 

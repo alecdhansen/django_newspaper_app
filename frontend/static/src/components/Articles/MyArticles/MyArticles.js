@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import ArticleProgressFilters from "./ArticleProgressFilters";
 import Button from "react-bootstrap/Button";
+import InputGroup from "react-bootstrap/InputGroup";
+import PostNewArticle from "./PostNewArticle";
 
 function MyArticles({ state }) {
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState("");
   const [activeArticle, setActiveArticle] = useState([]);
-  //   const [activeArticleID, setActiveArticleID] = useState(0);
 
   const handleError = (err) => {
     console.warn(err);
@@ -15,10 +17,10 @@ function MyArticles({ state }) {
     getArticles();
   }, []);
 
-  const progressList = [
+  const filterList = [
     ...new Set(articles.map((article) => article.article_process)),
   ];
-  const progressListHTML = progressList.map((article_process, index) => (
+  const filterListHTML = filterList.map((article_process, index) => (
     <Button
       className="filterbtns"
       key={index}
@@ -28,16 +30,7 @@ function MyArticles({ state }) {
     </Button>
   ));
 
-  const showArticle = (id) => {
-    const index = articles.findIndex((article) => article.id === id);
-    const selectedArticle = articles[index];
-    setActiveArticle(selectedArticle);
-
-    window.scrollTo({ top: 230, behavior: "smooth" });
-  };
-
   const getArticles = async (state) => {
-    // console.log("here", state.id);
     const response = await fetch(`/api_v1/user/articles/`).catch(handleError);
     if (!response.ok) {
       throw new Error("Network response not OK");
@@ -46,6 +39,14 @@ function MyArticles({ state }) {
       setArticles(data);
       setActiveArticle(data[0]);
     }
+  };
+
+  const showArticle = (id) => {
+    const index = articles.findIndex((article) => article.id === id);
+    const selectedArticle = articles[index];
+    setActiveArticle(selectedArticle);
+
+    window.scrollTo({ top: 230, behavior: "smooth" });
   };
 
   const articleListHtml = articles
@@ -76,18 +77,12 @@ function MyArticles({ state }) {
       <main className="col-8 offset-2">
         <div className="row">
           <div className="col-6">
-            <div>
-              <button
-                className="filterbtns all"
-                onClick={(e) => setFilter(null)}
-              >
-                All
-              </button>
-              {progressListHTML}
-            </div>
-            <ul style={{ listStyleType: "none", padding: "0px" }}>
-              {articleListHtml}
-            </ul>
+            <ArticleProgressFilters
+              setFilter={setFilter}
+              filterListHTML={filterListHTML}
+              articleListHtml={articleListHtml}
+            />
+            <PostNewArticle />
           </div>
           <div className="col-6">
             {activeArticle.title}
@@ -99,7 +94,3 @@ function MyArticles({ state }) {
   );
 }
 export default MyArticles;
-
-{
-  /* // .filter((article) => (filter ? article.category === filter : article)) */
-}

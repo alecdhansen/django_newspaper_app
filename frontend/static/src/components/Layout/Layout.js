@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ScrollToTop from "react-scroll-to-top";
 
-function Layout({ isAuth, setIsAuth, state, newState }) {
+function Layout({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
   return (
     <>
       <Header
@@ -12,13 +12,15 @@ function Layout({ isAuth, setIsAuth, state, newState }) {
         setIsAuth={setIsAuth}
         state={state}
         newState={newState}
+        isEditor={isEditor}
+        setIsEditor={setIsEditor}
       />
       <Outlet />
       <ScrollToTop
         color="#fff"
         style={{ bottom: 80, right: 50, backgroundColor: "rgb(229, 70, 70)" }}
       />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

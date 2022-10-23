@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
   const [user, setUser] = useState({ username: "", password: "" });
-  const { setIsAuth, setState } = props;
+  const { setIsAuth, setState, setIsEditor } = props;
   const navigate = useNavigate();
 
   const handleUsernameInput = (e) => {
@@ -45,10 +45,11 @@ function LoginForm(props) {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
       await setIsAuth(true);
-      // get id, then make a call to /users, set data to "state"
       setState(data);
+      if (data.is_superuser == true) {
+        setIsEditor(true);
+      }
       sessionStorage.setItem("state", JSON.stringify(data));
-      console.log(data);
       navigate("/");
     }
   };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
+import moment from "moment";
 
 function Articles() {
   const [text, setText] = useState("");
@@ -44,6 +45,7 @@ function Articles() {
       const data = await response.json();
       setArticles(data);
       setActiveArticle(data[0]);
+      console.log(activeArticle.created_at);
     }
   };
 
@@ -99,8 +101,12 @@ function Articles() {
               className="author"
               style={{ textAlign: "center", fontSize: "16px", padding: "0px" }}
             >
-              By {activeArticle.author_name}
+              By {activeArticle.author_name} -{" "}
+              <span style={{ fontWeight: "400" }}>
+                {moment(activeArticle.created_at).format("MMMM Do, YYYY")}
+              </span>
             </p>
+
             <div
               className="bodytext"
               style={{ marginTop: "40px", textAlign: "justify" }}
