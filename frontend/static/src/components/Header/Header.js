@@ -97,6 +97,15 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
           ) : (
             ""
           )}
+          {isAuth && isEditor ? (
+            <Nav.Item as="li" className="navlink">
+              <Nav.Link href="/admin/articles/submitted/" className="link">
+                Review Articles
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            ""
+          )}
           {isAuth ? (
             <Nav.Item as="li" className="navlink">
               <Nav.Link href="/user/profile/" className="link">

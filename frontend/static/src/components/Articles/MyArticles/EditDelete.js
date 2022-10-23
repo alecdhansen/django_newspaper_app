@@ -53,27 +53,80 @@ function EditDelete({
     setEditing(false);
   };
 
+  const submitArticle = async (e) => {
+    const formData = new FormData();
+    console.log(e);
+    formData.append("title", activeArticle.title);
+    formData.append("body", activeArticle.body);
+    formData.append("article_process", e.target.value);
+    for (const value of formData.values()) {
+      console.log(value);
+    }
+    const options = {
+      method: "PUT",
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      body: formData,
+    };
+    const response = await fetch(
+      `/api_v1/articles/${activeArticle.id}/`,
+      options
+    ).catch(handleError);
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    } else {
+      const data = await response.json();
+      console.log(data);
+      // setState({
+      //   category: "",
+      // });
+      window.location.reload();
+    }
+  };
+
   const previewTemplate = (
     <>
-    <li>
-      <h2>{activeArticle.title}</h2>
-      <p>{activeArticle.body}</p>
-      { activeArticle.article_progress == "Draft" ? (<Button type="button" variant="success" onClick={() => setEditing(true)}>
-        Edit
-      </Button>
-      <Button
-        variant="success"
-        type="button"
-        onClick={() => deleteArticle(activeArticle.id)}
-      >
-        Delete
-      </Button>) : ('')}
-    </li>
+      <div>
+        <span style={{ fontWeight: "800" }}>
+          {activeArticle.article_process}
+        </span>
+        {activeArticle.article_process == "Drafts" ? (
+          <>
+            <Button
+              type="button"
+              variant="success"
+              onClick={() => setEditing(true)}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="success"
+              type="button"
+              onClick={() => deleteArticle(activeArticle.id)}
+            >
+              Delete Draft
+            </Button>
+            <Button
+              variant="success"
+              type="button"
+              value="Submitted"
+              onClick={(e) => submitArticle(e)}
+            >
+              Submit for Publication Approval
+            </Button>
+          </>
+        ) : (
+          ""
+        )}
+        <h2>{activeArticle.title}</h2>
+        <p>{activeArticle.body}</p>
+      </div>
     </>
   );
 
   const editTemplate = (
-    <li>
+    <div>
       <label>Title</label>
       <input
         type="text"
@@ -105,7 +158,7 @@ function EditDelete({
       <Button type="button" variant="success" onClick={cancelEdit}>
         Cancel
       </Button>
-    </li>
+    </div>
   );
 
   return (

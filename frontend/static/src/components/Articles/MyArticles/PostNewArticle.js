@@ -119,7 +119,7 @@ function PostNewArticle() {
         value="Drafts"
         onClick={handleSubmit}
       >
-        Save
+        Save to Drafts
       </Button>
       <Button
         variant="success"
@@ -127,7 +127,7 @@ function PostNewArticle() {
         value="Submitted"
         onClick={handleSubmit}
       >
-        Submit
+        Submit for Publication Approval
       </Button>
     </Form>
   );

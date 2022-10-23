@@ -5,6 +5,7 @@ import LoadPage from "../Login/LoadPage";
 import ProfileForm from "../Profile/ProfileForm";
 import Articles from "../Articles/Articles";
 import MyArticles from "../Articles/MyArticles/MyArticles";
+import AdminArticles from "../Articles/AdminArticles";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -34,6 +35,8 @@ function App() {
     };
     checkAuth();
   }, []);
+
+  // **** This useEffect prohibits site from loading initally. Take a look at this ****
 
   console.log({ isEditor, isAuth });
 
@@ -65,6 +68,10 @@ function App() {
             }
           />
           <Route path="user/profile" element={<ProfileForm />} />
+          <Route
+            path="admin/articles/submitted"
+            element={<AdminArticles state={state} />}
+          />
           <Route path="user/articles" element={<MyArticles state={state} />} />
         </Route>
         <Route

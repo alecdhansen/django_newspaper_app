@@ -5,6 +5,7 @@ function ArticleProgressFilters({
 }) {
   return (
     <>
+      <h1>My Articles</h1>
       <div>
         <button className="filterbtns all" onClick={(e) => setFilter(null)}>
           All

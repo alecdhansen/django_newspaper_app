@@ -6,13 +6,13 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Article
 from .serializers import ArticleSerializer
-from .permissions import IsAuthorOrReadOnly
+from .permissions import IsAuthorOrReadOnly, IsEditor
 
 
 class ArticleListAPIView(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Article.objects.filter(is_published=True)
     serializer_class = ArticleSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Article.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -22,13 +22,28 @@ class UserArticleListAPIView(generics.ListCreateAPIView):
     serializer_class = ArticleSerializer
 
     def get_queryset(self):
-        return Article.objects.filter(author=self.request.user)
+        return Article.objects.filter(author=self.request.user).order_by("-created_at")
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
 
-class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthorOrReadOnly,)
-    queryset = Article.objects.all()
+class UserArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
+
+    def get_queryset(self):
+        return Article.objects.filter(author=self.request.user).order_by("-created_at")
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+
+class ArticleDetailAPIView(generics.ListAPIView):
+    serializer_class = ArticleSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    # queryset = Article.objects.filter(article_process="Submitted")
+
+    def get_queryset(self):
+        return Article.objects.filter(article_process="Submitted")
+
+    # .filter(is_published=True)
