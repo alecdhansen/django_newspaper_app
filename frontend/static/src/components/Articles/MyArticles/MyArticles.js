@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ArticleProgressFilters from "./ArticleProgressFilters";
 import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
+import EditDelete from "./EditDelete";
 import PostNewArticle from "./PostNewArticle";
 
 function MyArticles({ state }) {
@@ -85,8 +85,12 @@ function MyArticles({ state }) {
             <PostNewArticle />
           </div>
           <div className="col-6">
-            {activeArticle.title}
-            {activeArticle.body}
+            <EditDelete
+              activeArticle={activeArticle}
+              setActiveArticle={setActiveArticle}
+              articles={articles}
+              setArticles={setArticles}
+            />
           </div>
         </div>
       </main>
