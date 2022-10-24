@@ -47,3 +47,14 @@ class ArticleDetailAPIView(generics.ListAPIView):
         return Article.objects.filter(article_process="Submitted")
 
     # .filter(is_published=True)
+
+
+class AdminSubmittedArticleUpdateAPIView(generics.RetrieveUpdateAPIView):
+    serializer_class = ArticleSerializer
+    # permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        return Article.objects.all().order_by("-created_at")
+
+    # def perform_create(self, serializer):
+    #     serializer.save(author=self.request.user)

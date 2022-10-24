@@ -67,7 +67,11 @@ function Articles() {
         </div>
         <div className="col-5 right previewimg">
           <img
-            style={{ width: "100%", borderRadius: "2px" }}
+            style={{
+              width: "100%",
+              borderRadius: "2px",
+              maxHeight: "91px",
+            }}
             src={article.image}
           />
         </div>

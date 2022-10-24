@@ -12,9 +12,4 @@ class IsEditor(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True
-        if (
-            request.data.get("article_process") in ["Submitted"]
-            and obj.article_process == "Submitted"
-        ):
-            return True
-        return False
+        return obj.is_superuser == request.user

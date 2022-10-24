@@ -48,7 +48,7 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
               Welcome,{" "}
               <button className="welcomeusernamebtn">
                 <a href="/user/profile/" className="welcomeusername">
-                  {state.username}
+                  {state?.username}
                 </a>
                 !
               </button>
@@ -58,7 +58,7 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
                 }}
               >
                 <img
-                  src={state.avatar}
+                  src={state?.avatar}
                   style={{
                     width: "100%",
                     height: "30px",

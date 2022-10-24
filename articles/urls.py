@@ -21,4 +21,9 @@ urlpatterns = [
         views.ArticleDetailAPIView.as_view(),
         name="submitted_articles",
     ),
+    path(
+        "admin/articles/submitted/<int:pk>/",
+        views.AdminSubmittedArticleUpdateAPIView.as_view(),
+        name="submitted_articles",
+    ),
 ]
