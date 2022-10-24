@@ -25,7 +25,6 @@ function LoginForm(props) {
   };
 
   const handleSubmit = async (e, state) => {
-    // debugger;
     e.preventDefault();
     const options = {
       method: "POST",

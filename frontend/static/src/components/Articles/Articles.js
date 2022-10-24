@@ -43,9 +43,10 @@ function Articles() {
       throw new Error("Network response not OK");
     } else {
       const data = await response.json();
-      setArticles(data);
-      setActiveArticle(data[0]);
-      console.log(activeArticle.created_at);
+      const publishedArticles = data.filter((obj) => obj.is_published == true);
+      setArticles(publishedArticles);
+      console.log("here", publishedArticles);
+      setActiveArticle(publishedArticles[0]);
     }
   };
 

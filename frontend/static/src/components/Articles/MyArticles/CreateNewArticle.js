@@ -1,10 +1,9 @@
-import { IoMdAdd } from "react-icons/io";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
-function PostNewArticle() {
+function CreateNewArticle() {
   const [state, setState] = useState({
     image: null,
     title: "",
@@ -69,12 +68,22 @@ function PostNewArticle() {
         category: "",
       });
       window.location.reload();
+      // window.scrollTo({ top: 290, behavior: "smooth" });
     }
   };
   return (
     <Form>
-      <h1>Create New Article</h1>
-      <input
+      <h2
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "30px",
+        }}
+      >
+        Create New Article
+      </h2>
+      <Form.Control
+        style={{ marginBottom: "30px" }}
         type="file"
         className="form-control-file"
         name="image"
@@ -113,23 +122,32 @@ function PostNewArticle() {
           <option value="Local">Local</option>
         </Form.Select>
       </Form.Group>
-      <Button
-        variant="warning"
-        type="submit"
-        value="Drafts"
-        onClick={handleSubmit}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          marginTop: "30px",
+          marginBottom: "30px",
+        }}
       >
-        Save to Drafts
-      </Button>
-      <Button
-        variant="success"
-        type="submit"
-        value="Submitted"
-        onClick={handleSubmit}
-      >
-        Submit for Publication Approval
-      </Button>
+        <Button
+          variant="warning"
+          type="submit"
+          value="Drafts"
+          onClick={handleSubmit}
+        >
+          Save to Drafts
+        </Button>
+        <Button
+          variant="success"
+          type="submit"
+          value="Submitted"
+          onClick={handleSubmit}
+        >
+          Submit for Publication Approval
+        </Button>
+      </div>
     </Form>
   );
 }
-export default PostNewArticle;
+export default CreateNewArticle;

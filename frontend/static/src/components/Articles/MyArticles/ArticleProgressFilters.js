@@ -1,21 +1,34 @@
+import Button from "react-bootstrap/Button";
+import { FaDirections } from "react-icons/fa";
+
 function ArticleProgressFilters({
   setFilter,
   filterListHTML,
   articleListHtml,
 }) {
   return (
-    <>
-      <h1>My Articles</h1>
-      <div>
-        <button className="filterbtns all" onClick={(e) => setFilter(null)}>
+    <div
+      style={{ display: "flex", flexDirection: "column", marginBottom: "50px" }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          marginBottom: "10px",
+        }}
+      >
+        <Button className="filterbtns all" onClick={(e) => setFilter(null)}>
           All
-        </button>
+        </Button>
         {filterListHTML}
       </div>
-      <ul style={{ listStyleType: "none", padding: "0px" }}>
+      <ul
+        className="myarticlelist"
+        style={{ listStyleType: "none", padding: "0px" }}
+      >
         {articleListHtml}
       </ul>
-    </>
+    </div>
   );
 }
 export default ArticleProgressFilters;

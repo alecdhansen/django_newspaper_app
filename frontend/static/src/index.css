@@ -19,6 +19,7 @@ code {
   margin: 0px 3px;
   background-color: #fff;
   border: none;
+  padding: 0px;
 }
 .navlink:hover {
   background-color: rgba(229, 70, 70, 0.222);
@@ -28,6 +29,7 @@ code {
 }
 .link {
   color: rgb(229, 70, 70);
+  padding: 6px 12px;
 }
 .link:hover {
   color: rgb(229, 70, 70);
@@ -134,7 +136,7 @@ code {
   height: 100%;
   border-bottom: 0.5px solid rgb(182, 182, 182);
   z-index: 20;
-  padding-right: 75px;
+  padding-left: 100px;
 }
 .titlelogo {
   display: flex;
@@ -236,17 +238,17 @@ code {
   margin: 50px 0px;
 }
 .my-article-titles {
-  padding: 0px;
+  padding: 6px 12px;
   background-color: #fff;
   border: none;
-
-  /* width: 100%; */
-}
-.my-article-title {
+  font-weight: 800;
+  font-style: italic;
   text-align: left;
-  font-size: 20px;
-  padding: 0px;
-  margin: 0px;
+  font-size: 16px;
+}
+.my-article-titles:hover {
+  background-color: rgba(0, 0, 0, 0.081);
+  border-radius: 12px;
 }
 .progresslabel {
   background-color: rgb(229, 70, 70);
@@ -254,6 +256,25 @@ code {
   padding: 6px 6px;
   border-radius: 10px;
   font-size: 12px;
+}
+.myarticlelist {
+  border-top: 1px solid rgb(167, 167, 167);
+  border-bottom: 1px solid rgb(167, 167, 167);
+  margin: 0px;
+}
+.articledisplaybox {
+  background-color: rgba(229, 70, 70, 0.161);
+  padding: 40px 40px 20px 40px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+.articletitledisplay {
+  display: flex;
+  justify-content: center;
+  font-style: italic;
+  font-family: Newsreader, Arial, Helvetica, sans-serif;
+  margin-top: 30px;
+  text-align: center;
 }
 @media (max-width: 785px) {
   .filters2 {
@@ -288,5 +309,28 @@ code {
   .btnlist {
     display: flex;
     justify-content: space-around;
+  }
+  .left-h {
+    font-size: 10px;
+    padding: 8px 0px 8px 45px;
+  }
+  .navlink {
+    margin: 0px 3px;
+    padding: 0px;
+    margin-top: 10px;
+  }
+  .navlink:hover {
+    background-color: rgb(229, 70, 70);
+    color: #fff;
+    transition: 0.2s;
+    border-radius: 10px;
+  }
+  .link {
+    color: rgb(229, 70, 70);
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  .link:hover {
+    color: rgb(255, 255, 255);
   }
 }

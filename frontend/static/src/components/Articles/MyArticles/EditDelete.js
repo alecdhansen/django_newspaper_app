@@ -88,45 +88,65 @@ function EditDelete({
   const previewTemplate = (
     <>
       <div>
-        <span style={{ fontWeight: "800" }}>
-          {activeArticle.article_process}
-        </span>
-        {activeArticle.article_process == "Drafts" ? (
-          <>
-            <Button
-              type="button"
-              variant="success"
-              onClick={() => setEditing(true)}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "30px",
+          }}
+        >
+          Article Status:
+          <span style={{ fontWeight: "800" }}>
+            {" "}
+            {activeArticle.article_process}
+          </span>
+        </div>
+
+        <div>
+          {activeArticle.article_process == "Drafts" ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "30px",
+              }}
             >
-              Edit
-            </Button>
-            <Button
-              variant="success"
-              type="button"
-              onClick={() => deleteArticle(activeArticle.id)}
-            >
-              Delete Draft
-            </Button>
-            <Button
-              variant="success"
-              type="button"
-              value="Submitted"
-              onClick={(e) => submitArticle(e)}
-            >
-              Submit for Publication Approval
-            </Button>
-          </>
-        ) : (
-          ""
-        )}
-        <h2>{activeArticle.title}</h2>
-        <p>{activeArticle.body}</p>
+              <Button
+                variant="danger"
+                type="button"
+                onClick={() => deleteArticle(activeArticle.id)}
+              >
+                Delete Draft
+              </Button>
+              <Button
+                style={{ margin: "0px 10px" }}
+                type="button"
+                variant="warning"
+                onClick={() => setEditing(true)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="success"
+                type="button"
+                value="Submitted"
+                onClick={(e) => submitArticle(e)}
+              >
+                Submit for Publication Approval
+              </Button>
+            </div>
+          ) : (
+            ""
+          )}
+          <h2 className="articletitledisplay">{activeArticle.title}</h2>
+          <p>{activeArticle.body}</p>
+        </div>
       </div>
     </>
   );
 
   const editTemplate = (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <label>Title</label>
       <input
         type="text"
@@ -152,19 +172,34 @@ function EditDelete({
           })
         }
       />
-      <Button type="button" variant="success" onClick={handleSave}>
-        Save
-      </Button>
-      <Button type="button" variant="success" onClick={cancelEdit}>
-        Cancel
-      </Button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "30px",
+        }}
+      >
+        <Button type="button" variant="danger" onClick={cancelEdit}>
+          Cancel
+        </Button>
+        <Button
+          type="button"
+          style={{ marginLeft: "10px" }}
+          variant="success"
+          onClick={handleSave}
+        >
+          Save
+        </Button>
+      </div>
     </div>
   );
 
   return (
-    <Alert variant="success">
-      <ul>{isEditing ? editTemplate : previewTemplate} </ul>
-    </Alert>
+    <div className="articledisplaybox">
+      <ul style={{ padding: "0px" }}>
+        {isEditing ? editTemplate : previewTemplate}{" "}
+      </ul>
+    </div>
   );
 }
 export default EditDelete;

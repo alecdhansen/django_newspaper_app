@@ -40,22 +40,20 @@ function AdminArticles() {
     //   filter ? article.article_process.drafts === filter : article
     // )
     .map((article) => (
-      <li key={article.id} className="myarticles">
-        <div style={{ height: "20px" }} className="col-8">
+      <div key={article.id} className="myarticles">
+        <div className="col-12">
           <button
-            className="my-article-titles row-6"
+            className="my-article-titles row-6 my-article-title"
             name={article.title}
             value={article.id}
             key={article.title}
             onClick={() => showSubmittedArticle(article.id)}
           >
-            <div className="my-article-title">
-              {article.title} -{" "}
-              <span className="progresslabel">{article.article_process}</span>
-            </div>
+            {article.title}
           </button>
+          <span className="progresslabel">{article.article_process}</span>
         </div>
-      </li>
+      </div>
     ));
 
   const handleSubmit = async (e) => {
@@ -87,24 +85,50 @@ function AdminArticles() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-      }}
-    >
-      <div>{articleListHtml}</div>
-      <div style={{ width: "50%" }}>
-        <Button onClick={(e) => handleSubmit(e)} value="Rejected">
-          Reject
-        </Button>
-        <Button onClick={(e) => handleSubmit(e)} value="Published">
-          Publish
-        </Button>
-        {activeArticle?.title}
-        {activeArticle?.body}
+    <main className="col-10 offset-1 col-md-10 offset-md-1">
+      <h1
+        style={{
+          textAlign: "center",
+          fontSize: "40px",
+          marginBottom: "50px",
+        }}
+      >
+        Review for Publication
+      </h1>
+      <div className="row">
+        <ul
+          className="col-12 col-md-5"
+          style={{ listStyleType: "none", marginBottom: "70px" }}
+        >
+          <li style={{ fontSize: "30px", textAlign: "center" }}>
+            Pending Articles
+          </li>
+          {articleListHtml}
+        </ul>
+        <div className="col-12 col-md-6 offset-md-1">
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              variant="danger"
+              style={{ margin: "0px 3px" }}
+              onClick={(e) => handleSubmit(e)}
+              value="Rejected"
+            >
+              Reject
+            </Button>
+            <Button
+              variant="success"
+              style={{ margin: "0px 3px" }}
+              onClick={(e) => handleSubmit(e)}
+              value="Published"
+            >
+              Publish
+            </Button>
+          </div>
+          <h2 className="articletitledisplay">{activeArticle?.title}</h2>
+          <p style={{ marginBottom: "30px" }}> {activeArticle?.body}</p>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 export default AdminArticles;

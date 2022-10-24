@@ -22,7 +22,6 @@ function App() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      debugger;
       const response = await fetch("/dj-rest-auth/user/");
       if (!response.ok) {
         setIsAuth(false);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ArticleProgressFilters from "./ArticleProgressFilters";
 import Button from "react-bootstrap/Button";
 import EditDelete from "./EditDelete";
-import PostNewArticle from "./PostNewArticle";
+import CreateNewArticle from "./CreateNewArticle";
 
 function MyArticles({ state }) {
   const [articles, setArticles] = useState([]);
@@ -46,7 +46,7 @@ function MyArticles({ state }) {
     const selectedArticle = articles[index];
     setActiveArticle(selectedArticle);
 
-    window.scrollTo({ top: 230, behavior: "smooth" });
+    window.scrollTo({ top: 290, behavior: "smooth" });
   };
 
   const articleListHtml = articles
@@ -55,36 +55,46 @@ function MyArticles({ state }) {
     )
     .map((article) => (
       <li key={article.id} className="myarticles">
-        <div style={{ height: "20px" }} className="col-8">
+        <div style={{ height: "20px" }} className="col-12">
           <button
-            className="my-article-titles row-6"
+            className="my-article-titles"
             name={article.title}
             value={article.id}
             key={article.title}
             onClick={() => showArticle(article.id)}
           >
-            <div className="my-article-title">
-              {article.title} -{" "}
-              <span className="progresslabel">{article.article_process}</span>
-            </div>
+            {article.title}
           </button>
+          - <span className="progresslabel">{article.article_process}</span>
         </div>
       </li>
     ));
 
   return (
     <>
-      <main className="col-8 offset-2">
+      <main className="col-10 offset-1 col-md-10 offset-md-1">
+        <h1
+          style={{
+            textAlign: "center",
+            fontSize: "40px",
+            marginBottom: "50px",
+          }}
+        >
+          My Articles
+        </h1>
         <div className="row">
-          <div className="col-6">
+          <div
+            className="col-12 col-md-5"
+            // style={{ display: "flex", justifyContent: "center" }}
+          >
             <ArticleProgressFilters
               setFilter={setFilter}
               filterListHTML={filterListHTML}
               articleListHtml={articleListHtml}
             />
-            <PostNewArticle />
+            <CreateNewArticle />
           </div>
-          <div className="col-6">
+          <div className="col-12 col-md-6 offset-md-1">
             <EditDelete
               activeArticle={activeArticle}
               setActiveArticle={setActiveArticle}

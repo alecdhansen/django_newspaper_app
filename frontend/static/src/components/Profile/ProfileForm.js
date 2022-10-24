@@ -53,8 +53,8 @@ function ProfileForm() {
         {profile.avatar && <img src={preview} alt="" />}
         <Button
           style={{ marginBottom: "180px" }}
+          variant="success"
           type="submit"
-          className="submitbtn0"
         >
           Save
         </Button>
