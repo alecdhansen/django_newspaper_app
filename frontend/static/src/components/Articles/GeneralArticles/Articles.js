@@ -86,7 +86,7 @@ function Articles() {
           <div className="articleview col-12 col-md-6">
             <img
               style={{ width: "100%", borderRadius: "2px" }}
-              src={activeArticle.image}
+              src={activeArticle?.image}
             />
             <h2
               className="bodytext"
@@ -97,18 +97,18 @@ function Articles() {
                 fontSize: "40px",
               }}
             >
-              {activeArticle.title}
+              {activeArticle?.title}
             </h2>
             <p style={{ textAlign: "center", fontStyle: "italic" }}>
-              {activeArticle.category}
+              {activeArticle?.category}
             </p>
             <p
               className="author"
               style={{ textAlign: "center", fontSize: "16px", padding: "0px" }}
             >
-              By {activeArticle.author_name} -{" "}
+              By {activeArticle?.author_name} -{" "}
               <span style={{ fontWeight: "400" }}>
-                {moment(activeArticle.created_at).format("MMMM Do, YYYY")}
+                {moment(activeArticle?.created_at).format("MMMM Do, YYYY")}
               </span>
             </p>
 
@@ -116,7 +116,7 @@ function Articles() {
               className="bodytext"
               style={{ marginTop: "40px", textAlign: "justify" }}
             >
-              {activeArticle.body}
+              {activeArticle?.body}
             </div>
           </div>
           <div

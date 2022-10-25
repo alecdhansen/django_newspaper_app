@@ -1,5 +1,4 @@
 import Button from "react-bootstrap/Button";
-import { FaDirections } from "react-icons/fa";
 
 function ArticleProgressFilters({
   setFilter,

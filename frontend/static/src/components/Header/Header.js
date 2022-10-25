@@ -46,29 +46,18 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
             style={{ display: "flex", alignItems: "center" }}
             className="col-4 col-md-5 left-h"
           >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              Welcome,{" "}
-              <button className="welcomeusernamebtn">
-                <a href="/user/profile/" className="welcomeusername">
-                  {state?.username}
-                </a>
-                !
-              </button>
-              <div
-                style={{
-                  width: "30px",
-                }}
-              >
-                <img
-                  src={state?.avatar}
-                  style={{
-                    width: "100%",
-                    height: "30px",
-                    objectFit: "cover",
-                    borderRadius: "50%",
-                    border: "1px solid black",
-                  }}
-                />
+            <div style={{ display: "flex" }}>
+              <div className="usernameavatar">
+                Welcome,{" "}
+                <button className="welcomeusernamebtn">
+                  <a href="/user/profile/" className="welcomeusername">
+                    {state?.username}
+                  </a>
+                  !
+                </button>
+              </div>
+              <div className="avatarimgdiv">
+                <img className="avatarimg" src={state?.avatar} />
               </div>
             </div>
           </div>
@@ -110,7 +99,7 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
             {isAuth && isEditor ? (
               <Nav.Item className="navlink">
                 <Nav.Link href="/admin/articles/submitted/" className="link">
-                  Review Articles
+                  Admin Hub
                 </Nav.Link>
               </Nav.Item>
             ) : (

@@ -3,9 +3,9 @@ import { useNavigate, Routes, Route, json } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import LoadPage from "../Login/LoadPage";
 import ProfileForm from "../Profile/ProfileForm";
-import Articles from "../Articles/Articles";
+import Articles from "../Articles/GeneralArticles/Articles";
 import MyArticles from "../Articles/MyArticles/MyArticles";
-import AdminArticles from "../Articles/AdminArticles";
+import AdminArticles from "../Articles/AdminArticles/AdminHub";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);

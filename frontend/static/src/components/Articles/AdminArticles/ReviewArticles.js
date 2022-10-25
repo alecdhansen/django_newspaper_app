@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 
-function AdminArticles() {
+function ReviewArticles({}) {
   const [articles, setArticles] = useState([]);
   const [activeArticle, setActiveArticle] = useState();
 
@@ -35,26 +35,25 @@ function AdminArticles() {
     // window.scrollTo({ top: 230, behavior: "smooth" });
   };
 
-  const articleListHtml = articles
-    // .filter((article) =>
-    //   filter ? article.article_process.drafts === filter : article
-    // )
-    .map((article) => (
-      <div key={article.id} className="myarticles">
-        <div className="col-12">
-          <button
-            className="my-article-titles row-6 my-article-title"
-            name={article.title}
-            value={article.id}
-            key={article.title}
-            onClick={() => showSubmittedArticle(article.id)}
-          >
-            {article.title}
-          </button>
-          <span className="progresslabel">{article.article_process}</span>
-        </div>
+  const articleListHtml = articles.map((article) => (
+    <div key={article.id} className="myarticles">
+      <div className="col-12" style={{ display: "flex" }}>
+        <button
+          className="my-article-titles row-12 my-article-title"
+          name={article.title}
+          value={article.id}
+          key={article.title}
+          onClick={() => showSubmittedArticle(article.id)}
+        >
+          {article.title} -{" "}
+          <span className="authorspan">{article.author_name}</span>{" "}
+          <span className="processspan">
+            {article.article_process} for review
+          </span>
+        </button>
       </div>
-    ));
+    </div>
+  ));
 
   const handleSubmit = async (e) => {
     const formData = new FormData();
@@ -80,13 +79,13 @@ function AdminArticles() {
     } else {
       const data = await response.json();
       console.log(data);
-      window.location.reload();
+      getSubmittedArticles();
     }
   };
 
   return (
-    <main className="col-10 offset-1 col-md-10 offset-md-1">
-      <h1
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <h2
         style={{
           textAlign: "center",
           fontSize: "40px",
@@ -94,7 +93,7 @@ function AdminArticles() {
         }}
       >
         Review for Publication
-      </h1>
+      </h2>
       <div className="row">
         <ul
           className="col-12 col-md-5"
@@ -128,7 +127,7 @@ function AdminArticles() {
           <p style={{ marginBottom: "30px" }}> {activeArticle?.body}</p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
-export default AdminArticles;
+export default ReviewArticles;

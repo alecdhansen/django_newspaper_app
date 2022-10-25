@@ -136,7 +136,7 @@ code {
   height: 100%;
   border-bottom: 0.5px solid rgb(182, 182, 182);
   z-index: 20;
-  padding-left: 100px;
+  padding: 8px 75px 8px 0px;
 }
 .titlelogo {
   display: flex;
@@ -250,12 +250,35 @@ code {
   background-color: rgba(0, 0, 0, 0.081);
   border-radius: 12px;
 }
+.authorspan {
+  color: rgb(229, 70, 70);
+  font-style: normal;
+}
+.processspan {
+  background-color: rgb(229, 70, 70);
+  color: #fff;
+  padding: 6px 6px;
+  border-radius: 10px;
+  font-size: 12px;
+}
 .progresslabel {
   background-color: rgb(229, 70, 70);
   color: #fff;
   padding: 6px 6px;
   border-radius: 10px;
   font-size: 12px;
+}
+.buttongroup {
+  display: flex;
+  justify-content: flex-end;
+}
+.spacerbar {
+  border: 0.5px solid rgba(114, 114, 114, 0.222);
+  margin: 50px 200px;
+}
+.spacerbar2 {
+  border: 0.5px solid rgba(114, 114, 114, 0.222);
+  margin: 50px 100px;
 }
 .myarticlelist {
   border-top: 1px solid rgb(167, 167, 167);
@@ -276,7 +299,39 @@ code {
   margin-top: 30px;
   text-align: center;
 }
-@media (max-width: 785px) {
+.avatarimgdiv {
+  width: 30px;
+}
+.avatarimg {
+  width: 100%;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+.usernameavatar {
+  display: flex;
+  align-items: center;
+}
+.collapse {
+  justify-content: flex-end;
+}
+.archivedarticles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.aaa1 {
+  list-style-type: none;
+  margin-bottom: 70px;
+  padding: 0px 35px 0px 0px;
+}
+.aaa2 {
+  list-style-type: none;
+  margin-bottom: 70px;
+  padding: 0px 0px 0px 35px;
+}
+@media (max-width: 800px) {
   .filters2 {
     padding: 0px 50px;
   }
@@ -332,5 +387,41 @@ code {
   }
   .link:hover {
     color: rgb(255, 255, 255);
+  }
+  .buttongroup {
+    justify-content: center;
+  }
+  .spacerbar {
+    margin: 50px 20px;
+  }
+  .spacerbar2 {
+    margin: 50px 10px;
+  }
+  .welcomeusernamebtn {
+    display: none;
+  }
+  .usernameavatar {
+    display: none;
+  }
+  .avatarimgdiv {
+    width: 50px;
+  }
+  .avatarimg {
+    width: 100%;
+    height: 50px;
+  }
+  .left-h {
+    justify-content: center;
+    padding: 0px 40px;
+  }
+  .navbar {
+    padding: 0px 40px;
+    justify-content: center;
+  }
+  .aaa1 {
+    padding: 0px 12px;
+  }
+  .aaa2 {
+    padding: 0px 12px;
   }
 }

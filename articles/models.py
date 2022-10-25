@@ -10,11 +10,13 @@ class Article(models.Model):
     SUBMITTED = "Submitted"
     PUBLISHED = "Published"
     REJECTED = "Rejected"
+    ARCHIVED = "Archived"
     STATES = [
         (DRAFTS, "Drafts"),
         (SUBMITTED, "Submitted"),
         (PUBLISHED, "Published"),
         (REJECTED, "Rejected"),
+        (ARCHIVED, "Archived"),
     ]
     CHOICES = [
         (WORLD, "World"),
