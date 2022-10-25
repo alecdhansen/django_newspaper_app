@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
+import swal from "sweetalert";
 
 function ReviewArticles({}) {
   const [articles, setArticles] = useState([]);
@@ -80,6 +81,12 @@ function ReviewArticles({}) {
       const data = await response.json();
       console.log(data);
       getSubmittedArticles();
+      swal({
+        title: "Success!",
+        text: `${activeArticle.title} by ${activeArticle.author_name} was published.`,
+        icon: "success",
+        button: "Close",
+      });
     }
   };
 

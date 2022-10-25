@@ -19,7 +19,7 @@ code {
   margin: 0px 3px;
   background-color: #fff;
   border: none;
-  padding: 0px;
+  padding: 6px 12px;
 }
 .navlink:hover {
   background-color: rgba(229, 70, 70, 0.222);
@@ -30,6 +30,7 @@ code {
 .link {
   color: rgb(229, 70, 70);
   padding: 6px 12px;
+  text-decoration: none;
 }
 .link:hover {
   color: rgb(229, 70, 70);

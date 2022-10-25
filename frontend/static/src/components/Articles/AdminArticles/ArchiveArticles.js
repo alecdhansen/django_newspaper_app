@@ -3,6 +3,7 @@ import moment from "moment";
 import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
+import swal from "sweetalert";
 
 function ArchiveArticles(setPage) {
   const [show, setShow] = useState(false);
@@ -121,6 +122,12 @@ function ArchiveArticles(setPage) {
       setShow(false);
       getPublishedArticles();
       getArchivedArticles();
+      swal({
+        title: "Success!",
+        text: `${activeArticle.title} by ${activeArticle.author_name} was sent to the archives.`,
+        icon: "success",
+        button: "Close",
+      });
     }
   };
 

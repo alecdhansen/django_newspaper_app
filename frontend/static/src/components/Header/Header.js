@@ -1,10 +1,8 @@
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Container from "react-bootstrap/Container";
 
 function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
   const navigate = useNavigate();
@@ -50,9 +48,9 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
               <div className="usernameavatar">
                 Welcome,{" "}
                 <button className="welcomeusernamebtn">
-                  <a href="/user/profile/" className="welcomeusername">
+                  <Link to={"/user/profile/"} className="welcomeusername">
                     {state?.username}
-                  </a>
+                  </Link>
                   !
                 </button>
               </div>
@@ -80,45 +78,45 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
           >
             {isAuth ? (
               <Nav.Item className="navlink">
-                <Nav.Link href="/" className="link">
+                <Link to={"/"} className="link">
                   Home
-                </Nav.Link>
+                </Link>
               </Nav.Item>
             ) : (
               ""
             )}
             {isAuth && !isEditor ? (
               <Nav.Item className="navlink">
-                <Nav.Link href="/user/articles/" className="link">
+                <Link to={"/user/articles/"} className="link">
                   My Articles
-                </Nav.Link>
+                </Link>
               </Nav.Item>
             ) : (
               ""
             )}
             {isAuth && isEditor ? (
               <Nav.Item className="navlink">
-                <Nav.Link href="/admin/articles/submitted/" className="link">
+                <Link to={"/adminhub/"} className="link">
                   Admin Hub
-                </Nav.Link>
+                </Link>
               </Nav.Item>
             ) : (
               ""
             )}
             {isAuth ? (
               <Nav.Item className="navlink">
-                <Nav.Link href="/user/profile/" className="link">
+                <Link to={"/user/profile/"} className="link">
                   Profile
-                </Nav.Link>
+                </Link>
               </Nav.Item>
             ) : (
               ""
             )}
             {!isAuth ? (
               <Nav.Item className="navlink">
-                <Nav.Link href="/loadpage/" className="link">
+                <Link to={"/loadpage"} className="link">
                   Login
-                </Nav.Link>
+                </Link>
               </Nav.Item>
             ) : (
               <Button className="navlink" onClick={() => logout()}>

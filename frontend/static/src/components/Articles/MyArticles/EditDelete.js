@@ -1,13 +1,9 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Cookies from "js-cookie";
+import swal from "sweetalert";
 
-function EditDelete({
-  activeArticle,
-  setActiveArticle,
-  articles,
-  setArticles,
-}) {
+function EditDelete({ activeArticle, setActiveArticle, getArticles }) {
   const [isEditing, setEditing] = useState(false);
   const [editedArticle, setEditedArticle] = useState({ ...activeArticle });
 
@@ -30,7 +26,13 @@ function EditDelete({
       throw new Error("Network response was not ok!");
     }
     console.log(response);
-    window.location.reload();
+    window.scrollTo({ top: 290, behavior: "smooth" });
+    getArticles();
+    swal({
+      text: "Your draft was deleted.",
+      icon: "success",
+      button: "Close",
+    });
   };
 
   const updateArticle = (updatedArticle) => {

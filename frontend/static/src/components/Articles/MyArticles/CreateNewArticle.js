@@ -2,8 +2,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import Cookies from "js-cookie";
+import swal from "sweetalert";
 
-function CreateNewArticle() {
+function CreateNewArticle({ getArticles }) {
   const [state, setState] = useState({
     image: null,
     title: "",
@@ -44,7 +45,6 @@ function CreateNewArticle() {
     for (const value of formData.values()) {
       console.log(value);
     }
-
     const options = {
       method: "POST",
       headers: {
@@ -52,7 +52,6 @@ function CreateNewArticle() {
       },
       body: formData,
     };
-
     const response = await fetch("/api_v1/articles/", options).catch(
       handleError
     );
@@ -67,8 +66,22 @@ function CreateNewArticle() {
         body: "",
         category: "",
       });
-      window.location.reload();
-      // window.scrollTo({ top: 290, behavior: "smooth" });
+      window.scrollTo({ top: 290, behavior: "smooth" });
+      getArticles();
+      if (e.target.value === "Submitted") {
+        swal({
+          title: "Success!",
+          text: "Your article was submitted for review.",
+          icon: "success",
+          button: "Close",
+        });
+      } else if (e.target.value === "Drafts") {
+        swal({
+          text: "Your article was saved as a draft.",
+          icon: "success",
+          button: "Close",
+        });
+      }
     }
   };
   return (

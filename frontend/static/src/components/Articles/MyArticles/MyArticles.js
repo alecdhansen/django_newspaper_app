@@ -30,7 +30,7 @@ function MyArticles({ state }) {
     </Button>
   ));
 
-  const getArticles = async (state) => {
+  const getArticles = async () => {
     const response = await fetch(`/api_v1/user/articles/`).catch(handleError);
     if (!response.ok) {
       throw new Error("Network response not OK");
@@ -83,16 +83,13 @@ function MyArticles({ state }) {
           My Articles
         </h1>
         <div className="row">
-          <div
-            className="col-12 col-md-5"
-            // style={{ display: "flex", justifyContent: "center" }}
-          >
+          <div className="col-12 col-md-5">
             <ArticleProgressFilters
               setFilter={setFilter}
               filterListHTML={filterListHTML}
               articleListHtml={articleListHtml}
             />
-            <CreateNewArticle />
+            <CreateNewArticle getArticles={getArticles} />
           </div>
           <div className="col-12 col-md-6 offset-md-1">
             <EditDelete
@@ -100,6 +97,7 @@ function MyArticles({ state }) {
               setActiveArticle={setActiveArticle}
               articles={articles}
               setArticles={setArticles}
+              getArticles={getArticles}
             />
           </div>
         </div>

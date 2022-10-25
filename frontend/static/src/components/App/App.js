@@ -68,10 +68,7 @@ function App() {
             }
           />
           <Route path="user/profile" element={<ProfileForm />} />
-          <Route
-            path="admin/articles/submitted"
-            element={<AdminArticles state={state} />}
-          />
+          <Route path="adminhub" element={<AdminArticles state={state} />} />
           <Route path="user/articles" element={<MyArticles state={state} />} />
         </Route>
         <Route
