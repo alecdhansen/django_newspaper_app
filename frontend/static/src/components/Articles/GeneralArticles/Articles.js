@@ -73,7 +73,7 @@ function Articles() {
               borderRadius: "2px",
               maxHeight: "91px",
             }}
-            src={article.image}
+            src={article?.image}
           />
         </div>
       </li>
