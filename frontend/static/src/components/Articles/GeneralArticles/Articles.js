@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import moment from "moment";
 
 function Articles() {
-  const [text, setText] = useState("");
   const [articles, setArticles] = useState([]);
   const [activeArticle, setActiveArticle] = useState([]);
   const [filter, setFilter] = useState("");
@@ -26,7 +25,7 @@ function Articles() {
   };
 
   const showArticle = (id) => {
-    const index = articles.findIndex((article) => article.id === id);
+    const index = articles.findIndex((article) => article.id == id);
     const selectedArticle = articles[index];
     setActiveArticle(selectedArticle);
 
@@ -45,13 +44,12 @@ function Articles() {
       const data = await response.json();
       const publishedArticles = data.filter((obj) => obj.is_published == true);
       setArticles(publishedArticles);
-      console.log("here", publishedArticles);
       setActiveArticle(publishedArticles[0]);
     }
   };
 
   const articleListHtml = articles
-    .filter((article) => (filter ? article.category === filter : article))
+    .filter((article) => (filter ? article.category == filter : article))
     .map((article) => (
       <li key={article.id} className="btnlist row" style={{ height: "150px" }}>
         <div className="col-7 left">
@@ -74,6 +72,7 @@ function Articles() {
               maxHeight: "91px",
             }}
             src={article?.image}
+            alt=""
           />
         </div>
       </li>
@@ -87,6 +86,7 @@ function Articles() {
             <img
               style={{ width: "100%", borderRadius: "2px" }}
               src={activeArticle?.image}
+              alt=""
             />
             <h2
               className="bodytext"

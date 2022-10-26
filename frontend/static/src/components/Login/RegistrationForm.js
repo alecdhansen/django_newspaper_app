@@ -37,7 +37,6 @@ function RegistrationForm(props) {
     const response = await fetch("/dj-rest-auth/registration/", options).catch(
       handleError
     );
-    console.log(response);
     if (!response.ok) {
       throw new Error("Oops! Something went wrong");
     } else {

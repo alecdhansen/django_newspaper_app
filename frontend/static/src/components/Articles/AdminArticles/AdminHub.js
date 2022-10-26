@@ -8,9 +8,9 @@ function AdminHub() {
   const [page, setPage] = useState("a");
 
   let content;
-  if (page === "a") {
+  if (page == "a") {
     content = <ReviewArticles />;
-  } else if (page === "b") {
+  } else if (page == "b") {
     content = <ArchiveArticles setPage={setPage} />;
   }
 

@@ -6,12 +6,11 @@ import swal from "sweetalert";
 function EditDelete({ activeArticle, setActiveArticle, getArticles }) {
   const [isEditing, setEditing] = useState(false);
   const [editedArticle, setEditedArticle] = useState({ ...activeArticle });
-
   const handleError = (err) => {
     console.warn(err);
   };
 
-  const deleteArticle = async (id) => {
+  const deleteArticle = async () => {
     const options = {
       method: "DELETE",
       headers: {
@@ -25,7 +24,6 @@ function EditDelete({ activeArticle, setActiveArticle, getArticles }) {
     if (!response.ok) {
       throw new Error("Network response was not ok!");
     }
-    console.log(response);
     window.scrollTo({ top: 290, behavior: "smooth" });
     getArticles();
     swal({
@@ -35,13 +33,9 @@ function EditDelete({ activeArticle, setActiveArticle, getArticles }) {
     });
   };
 
-  const updateArticle = (updatedArticle) => {
-    const index = activeArticle.findIndex(
-      (activeArticle) => activeArticle.id === updatedArticle.id
-    );
-    const updatedactiveArticle = [...activeArticle];
-    updatedactiveArticle[index] = updatedArticle;
-    setActiveArticle(updatedactiveArticle);
+  const setEdit = () => {
+    setEditing(true);
+    setEditedArticle(activeArticle);
   };
 
   const cancelEdit = () => {
@@ -49,20 +43,41 @@ function EditDelete({ activeArticle, setActiveArticle, getArticles }) {
     setEditedArticle({ ...activeArticle });
   };
 
-  const handleSave = () => {
-    updateArticle(editedArticle);
+  const handleSave = async () => {
+    const formData = new FormData();
+    formData.append("title", editedArticle.title);
+    formData.append("body", editedArticle.body);
+    const options = {
+      method: "PATCH",
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      body: formData,
+    };
+    const response = await fetch(
+      `/api_v1/articles/${editedArticle.id}/`,
+      options
+    ).catch(handleError);
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    } else {
+      const data = await response.json();
+    }
+    swal({
+      text: "Your updated draft was saved.",
+      icon: "success",
+      button: "Close",
+    });
     setEditing(false);
+    setActiveArticle(editedArticle);
+    getArticles();
   };
 
   const submitArticle = async (e) => {
     const formData = new FormData();
-    console.log(e);
     formData.append("title", activeArticle.title);
     formData.append("body", activeArticle.body);
     formData.append("article_process", e.target.value);
-    for (const value of formData.values()) {
-      console.log(value);
-    }
     const options = {
       method: "PUT",
       headers: {
@@ -78,12 +93,14 @@ function EditDelete({ activeArticle, setActiveArticle, getArticles }) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
-      console.log(data);
-      // setState({
-      //   category: "",
-      // });
-      window.location.reload();
     }
+    swal({
+      title: "Success!",
+      text: "Your article was submitted for review.",
+      icon: "success",
+      button: "Close",
+    });
+    getArticles();
   };
 
   const previewTemplate = (
@@ -123,7 +140,7 @@ function EditDelete({ activeArticle, setActiveArticle, getArticles }) {
                 style={{ margin: "0px 10px" }}
                 type="button"
                 variant="warning"
-                onClick={() => setEditing(true)}
+                onClick={() => setEdit()}
               >
                 Edit
               </Button>
@@ -204,3 +221,29 @@ function EditDelete({ activeArticle, setActiveArticle, getArticles }) {
   );
 }
 export default EditDelete;
+
+// const formData = new FormData();
+// formData.append("title", activeArticle.title);
+// formData.append("body", activeArticle.body);
+// const options = {
+//   method: "PATCH",
+//   headers: {
+//     "X-CSRFToken": Cookies.get("csrftoken"),
+//   },
+//   body: formData,
+// };
+// const response = await fetch(
+//   `/api_v1/articles/${activeArticle.id}/`,
+//   options
+// ).catch(handleError);
+// if (!response.ok) {
+//   throw new Error("Network response was not OK");
+// } else {
+//   const data = await response.json();
+// }
+// // setActiveArticle(editedArticle);
+// swal({
+//   text: "Your updated draft was saved.",
+//   icon: "success",
+//   button: "Close",
+// });

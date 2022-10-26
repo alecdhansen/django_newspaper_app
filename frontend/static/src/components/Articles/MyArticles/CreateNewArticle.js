@@ -31,7 +31,6 @@ function CreateNewArticle({ getArticles }) {
       image: file,
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -42,9 +41,6 @@ function CreateNewArticle({ getArticles }) {
     formData.append("category", state.category);
     formData.append("article_process", e.target.value);
     formData.append("author", 1);
-    for (const value of formData.values()) {
-      console.log(value);
-    }
     const options = {
       method: "POST",
       headers: {
@@ -59,7 +55,6 @@ function CreateNewArticle({ getArticles }) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
-      console.log(data);
       setState({
         image: null,
         title: "",
@@ -68,14 +63,14 @@ function CreateNewArticle({ getArticles }) {
       });
       window.scrollTo({ top: 290, behavior: "smooth" });
       getArticles();
-      if (e.target.value === "Submitted") {
+      if (e.target.value == "Submitted") {
         swal({
           title: "Success!",
           text: "Your article was submitted for review.",
           icon: "success",
           button: "Close",
         });
-      } else if (e.target.value === "Drafts") {
+      } else if (e.target.value == "Drafts") {
         swal({
           text: "Your article was saved as a draft.",
           icon: "success",

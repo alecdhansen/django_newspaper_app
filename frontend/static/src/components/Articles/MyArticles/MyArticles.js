@@ -42,17 +42,14 @@ function MyArticles({ state }) {
   };
 
   const showArticle = (id) => {
-    const index = articles.findIndex((article) => article.id === id);
+    const index = articles.findIndex((article) => article.id == id);
     const selectedArticle = articles[index];
     setActiveArticle(selectedArticle);
-
     window.scrollTo({ top: 290, behavior: "smooth" });
   };
 
   const articleListHtml = articles
-    .filter((article) =>
-      filter ? article.article_process === filter : article
-    )
+    .filter((article) => (filter ? article.article_process == filter : article))
     .map((article) => (
       <li key={article.id} className="myarticles">
         <div style={{ height: "20px" }} className="col-12">

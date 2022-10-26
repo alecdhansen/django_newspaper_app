@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
 
-function ReviewArticles({}) {
+function ReviewArticles() {
   const [articles, setArticles] = useState([]);
   const [activeArticle, setActiveArticle] = useState();
 
@@ -23,13 +23,12 @@ function ReviewArticles({}) {
       throw new Error("Network response not OK");
     } else {
       const data = await response.json();
-      console.log(data);
       setArticles(data);
     }
   };
 
   const showSubmittedArticle = (id) => {
-    const index = articles.findIndex((article) => article.id === id);
+    const index = articles.findIndex((article) => article.id == id);
     const selectedArticle = articles[index];
     setActiveArticle(selectedArticle);
 
@@ -61,7 +60,7 @@ function ReviewArticles({}) {
     formData.append("body", activeArticle.body);
     formData.append("title", activeArticle.title);
     formData.append("article_process", e.target.value);
-    if (e.target.value === "Published") {
+    if (e.target.value == "Published") {
       formData.append("is_published", true);
     }
     const options = {
@@ -79,14 +78,23 @@ function ReviewArticles({}) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
-      console.log(data);
       getSubmittedArticles();
-      swal({
-        title: "Success!",
-        text: `${activeArticle.title} by ${activeArticle.author_name} was published.`,
-        icon: "success",
-        button: "Close",
-      });
+      window.scrollTo({ top: 290, behavior: "smooth" });
+      if (e.target.value == "Rejected") {
+        swal({
+          title: "Confirmed.",
+          text: `${activeArticle.title} by ${activeArticle.author_name} was rejected.`,
+          icon: "success",
+          button: "Close",
+        });
+      } else if (e.target.value == "Published") {
+        swal({
+          title: "Success!",
+          text: `${activeArticle.title} by ${activeArticle.author_name} was published!`,
+          icon: "success",
+          button: "Close",
+        });
+      }
     }
   };
 

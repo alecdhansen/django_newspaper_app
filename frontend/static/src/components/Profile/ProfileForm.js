@@ -35,7 +35,6 @@ function ProfileForm() {
     const response = await fetch("/api_v1/user/profile/", options);
     const data = await response.json();
     navigate("/");
-    console.log(data);
   };
 
   return (

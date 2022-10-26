@@ -55,7 +55,7 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
                 </button>
               </div>
               <div className="avatarimgdiv">
-                <img className="avatarimg" src={state?.avatar} />
+                <img className="avatarimg" src={state?.avatar} alt="" />
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@ function Header({ isAuth, setIsAuth, state, newState, isEditor, setIsEditor }) {
               </Nav.Item>
             ) : (
               <Button className="navlink" onClick={() => logout()}>
-                <div className="link">Logout</div>
+                <a className="link">Logout</a>
               </Button>
             )}
           </Navbar.Collapse>

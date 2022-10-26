@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
 import swal from "sweetalert";
 
-function ArchiveArticles(setPage) {
+function ArchiveArticles() {
   const [show, setShow] = useState(false);
   const [articles, setArticles] = useState([]);
   const [archivedArticles, setArchivedArticles] = useState([]);
@@ -18,7 +18,7 @@ function ArchiveArticles(setPage) {
   const handleShow = (e) => {
     setShow(true);
     const selectedArticles = articles.filter(
-      (article) => article.id == e.target.value
+      (article) => article.id.toString() === e.target.value
     );
     setActiveArticle(selectedArticles[0]);
   };
@@ -40,7 +40,6 @@ function ArchiveArticles(setPage) {
       const data = await response.json();
       const publishedArticles = data.filter((obj) => obj.is_published == true);
       setArticles(publishedArticles);
-      console.log("Published articles list -->", publishedArticles);
     }
   };
 
@@ -77,7 +76,6 @@ function ArchiveArticles(setPage) {
         (obj) => obj.article_process == "Archived"
       );
       setArchivedArticles(newArchivedArticles);
-      console.log("Published articles list -->", archivedArticles);
     }
   };
 
@@ -100,9 +98,6 @@ function ArchiveArticles(setPage) {
     formData.append("title", activeArticle.title);
     formData.append("article_process", e.target.value);
     formData.append("is_published", false);
-
-    console.log(activeArticle.id);
-
     const options = {
       method: "PUT",
       headers: {
@@ -118,10 +113,10 @@ function ArchiveArticles(setPage) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
-      console.log(data);
       setShow(false);
       getPublishedArticles();
       getArchivedArticles();
+      window.scrollTo({ top: 290, behavior: "smooth" });
       swal({
         title: "Success!",
         text: `${activeArticle.title} by ${activeArticle.author_name} was sent to the archives.`,
