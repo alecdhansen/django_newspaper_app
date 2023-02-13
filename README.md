@@ -4,5 +4,8 @@ Full CRUD application designed for three distinct user types:
 ● The editor is able to approve articles for publication or reject those
   articles. He also can archive articles that are live on the homepage and view the archives.
 
+Log in quickly using these credentials:
+Username: Alec
+Password: safepass1
 
 Check it out here --> https://newspaper-app-alecdhansen.herokuapp.com/ 
